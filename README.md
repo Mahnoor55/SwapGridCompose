@@ -107,6 +107,7 @@ DragSwapRow(
 ## 📸 Demo
 
 ![Demo](https://github.com/Mahnoor55/SwapGridCompose/blob/main/demo.gif)
+![Demo](https://github.com/Mahnoor55/SwapGridCompose/blob/main/demo2.gif)
 
 ---
 
