@@ -40,40 +40,41 @@ implementation("com.github.Mahnoor55:SwapGridCompose:v1.0.0")
 ### 🔹 Swap Grid Example:
 
 ```kotlin
-val avatarList = remember {
-    mutableStateListOf(
-        R.drawable.manager,
-        R.drawable.supervisor,
-        R.drawable.tech_avatar,
-        R.drawable.support_avatar
-    )
-}
+ val images = remember {
+            mutableStateListOf(
+                R.drawable.j1, R.drawable.j2, R.drawable.j3, R.drawable.j4,
+                R.drawable.j5, R.drawable.j6, R.drawable.j7, R.drawable.j8, R.drawable.j9,
+            )
+        }
 
-DragSwapGrid(
-    listSize = avatarList.size,
-    columns = 2,
-    boxSize = 100.dp,
-    onSwap = { fromIndex, toIndex ->
-        val temp = avatarList[fromIndex]
-        avatarList[fromIndex] = avatarList[toIndex]
-        avatarList[toIndex] = temp
+ DragSwapGrid(
+            listSize = images.size,
+            columns = 3,
+            boxSize = 80.dp,
+            onSwap = { from, to ->
+                images.apply {
+                    val temp = this[from]
+                    this[from] = this[to]
+                    this[to] = temp
+                }
+            }
+        ) { index ->
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(3.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = images[index]),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .clip(RoundedCornerShape(10.dp)),
+                    contentScale = ContentScale.FillBounds
+                )
+            }
+        }
     }
-) { index ->
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Image(
-            painter = painterResource(id = avatarList[index]),
-            contentDescription = null,
-            modifier = Modifier.size(80.dp).clip(CircleShape),
-            contentScale = ContentScale.Crop
-        )
-        Text(
-            text = "Role ${index + 1}",
-            fontSize = 14.sp,
-            color = Color.Black,
-            fontWeight = FontWeight.Bold
-        )
-    }
-}
 ```
 
 ### 🔹 Swap Row Example:
