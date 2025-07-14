@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.carousel.circular"
+    namespace = "com.swap.list"
     compileSdk = 35
 
     defaultConfig {
@@ -33,6 +33,19 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+    }
+}
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.Mahnoor55"
+                artifactId = "SwapGridCompose"
+                version = "v1.0.0"
+            }
+        }
     }
 }
 

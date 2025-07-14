@@ -47,86 +47,24 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-data class StaffMember(
-    val role: String,
-    val avatarRes: Int
-)
 @Preview
 @Composable
 fun SwapListPreview() {
-    val staffList = remember {
-        mutableStateListOf(
-            StaffMember("📞 Agent", R.drawable.f1),
-            StaffMember("💼 Manager", R.drawable.p2),
-            StaffMember("🔧 Tech Support", R.drawable.p1),
-            StaffMember("📋 Supervisor", R.drawable.f2)
-
-        )
-    }
-        val animalList = remember {
-            mutableStateListOf(
-                R.drawable.cat,
-                R.drawable.elephant,
-                R.drawable.bug,
-                R.drawable.rat
-            )
-    }
-    val boxSize = 80.dp
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally,) {
         Text(
-            text = "Team Members",
-            fontSize = 16.sp,
+            text = "Drag to Swap",
+            fontSize = 20.sp,
             fontWeight = FontWeight.SemiBold,
             color = Color.Black
         )
-        Spacer(modifier = Modifier.height(10.dp))
-        DragSwapRow(listSize = staffList.size, boxSize = boxSize, onSwap = { from, to ->
-            staffList.apply {
-                val temp = this[from]
-                this[from] = this[to]
-                this[to] = temp
-            }
-        }) { index ->
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(blue, shape = RoundedCornerShape(8.dp))
-                    .padding(3.dp)
-            ) {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Image(
-                        painter = painterResource(id = staffList[index].avatarRes),
-                        contentDescription = staffList[index].role,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f) // Fill available vertical space proportionally
-                            .clip(RoundedCornerShape(8.dp)),
-                        contentScale = ContentScale.FillHeight
-                    )
-
-                    Spacer(modifier = Modifier.height(4.dp))
-
-                    Text(
-                        text = staffList[index].role,
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = Color.White
-                    )
-                }
-            }
-
-        }
+        Spacer(Modifier.height(20.dp))
 
         val images = remember {
             mutableStateListOf(
                 R.drawable.j1, R.drawable.j2, R.drawable.j3, R.drawable.j4,
-                R.drawable.j5, R.drawable.j6,R.drawable.j7, R.drawable.j8, R.drawable.j9,
+                R.drawable.j5, R.drawable.j6, R.drawable.j7, R.drawable.j8, R.drawable.j9,
             )
         }
 
@@ -152,26 +90,10 @@ fun SwapListPreview() {
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxSize()
-                        .clip(RoundedCornerShape(8.dp)),
-                    contentScale = ContentScale.FillHeight
+                        .clip(RoundedCornerShape(10.dp)),
+                    contentScale = ContentScale.FillBounds
                 )
             }
-        }
-        DragSwapColumn (listSize = animalList.size, boxSize = boxSize, onSwap = { from, to ->
-            animalList.apply {
-                val temp = this[from]
-                this[from] = this[to]
-                this[to] = temp
-            }
-        }) { index ->
-            Image(
-                painter = painterResource(id = animalList[index]),
-                contentDescription = "Image $index",
-                modifier = Modifier
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(8.dp)),
-                contentScale = ContentScale.FillWidth
-            )
         }
     }
 }
